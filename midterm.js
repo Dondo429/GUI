@@ -2,8 +2,8 @@ var canvas;
 var gl;
 var V;
 var P;
-var near = 1;
-var far = 250;
+var near = 10;
+var far = 120;
 
 
 var time = 0.0;
@@ -18,7 +18,7 @@ function init() {
   gl = WebGLUtils.setupWebGL(canvas);
   if (!gl) { alert("WebGL initialization failed"); }
 
-  gl.clearColor(222/255, 222/255, 222/255, 1.0);
+  gl.clearColor(0, 0, 0, 1.0);
   gl.enable(gl.DEPTH_TEST);
 
   for (var name in spheres ) {
@@ -39,7 +39,7 @@ function init() {
       MV : gl.getUniformLocation(cylinder.program, "MV"),
       P : gl.getUniformLocation(cylinder.program, "P")
     };
-  }
+  };
 
   for (var name in backgrounds) {
     var backdrop = backgrounds[name].model = new BG(backgrounds[name].source);
@@ -49,7 +49,7 @@ function init() {
       MV : gl.getUniformLocation(backdrop.program, "MV"),
       P : gl.getUniformLocation(backdrop.program, "P")
     };
-  }
+  };
 
   resize();
 
@@ -225,7 +225,7 @@ function drawBG(data, ms) {
   ms.translate(135 - time, 0, -20);
   if (time == 140) {
     time = 0;
-  }
+  };
   ms.scale(70, 70, 1);
   gl.useProgram(back.model.program);
   gl.uniformMatrix4fv(back.model.uniforms.MV, false, flatten(ms.current()));
